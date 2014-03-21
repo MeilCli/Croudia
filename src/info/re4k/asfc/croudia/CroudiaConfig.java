@@ -1,8 +1,8 @@
 package info.re4k.asfc.croudia;
 
 public class CroudiaConfig{
-	public static boolean isLog = true;
-	public static boolean isTest = true;
+	public static boolean isLog = false;
+	public static boolean isTest = false;
 	private CroudiaAPIKey key;
 	private boolean isGzipEnable = true;
 	private int connectTimeOut = 10*1000;
