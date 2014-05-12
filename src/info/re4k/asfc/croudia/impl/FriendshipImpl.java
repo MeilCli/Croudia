@@ -3,6 +3,7 @@ package info.re4k.asfc.croudia.impl;
 import info.re4k.asfc.croudia.Friendship;
 import info.re4k.asfc.croudia.json.JSONArray;
 import info.re4k.asfc.croudia.json.JSONObject;
+import static info.re4k.asfc.croudia.util.JSONUtil.*;
 
 public class FriendshipImpl implements Friendship{
 	private boolean following,followedby;
@@ -25,9 +26,9 @@ public class FriendshipImpl implements Friendship{
 				}
 			}
 		}
-		id = obj.isNull("id")?0:obj.getLong("id");
-		name = obj.isNull("name")?"":obj.getString("name");
-		screen_name = obj.isNull("screen_name")?"":obj.getString("screen_name");
+		id = getLong(obj,"id");
+		name = getString(obj,"name");
+		screen_name = getString(obj,"screen_name");
 	}
 
 	@Override

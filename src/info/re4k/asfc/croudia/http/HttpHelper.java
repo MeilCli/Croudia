@@ -123,6 +123,9 @@ public class HttpHelper{
 			}
 		}
 		String res = sb.toString();
+		if(CroudiaConfig.isLog==true){
+			System.out.println(res);
+		}
 		if(responseCode==HttpResponseCode.Http_Bad_Request){
 			JSONObject obj = new JSONObject(res);
 			String errorResponseMessage;

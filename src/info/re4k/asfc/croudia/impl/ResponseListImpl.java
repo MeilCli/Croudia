@@ -18,4 +18,9 @@ public class ResponseListImpl<T,E> extends ArrayList<T> implements ResponseList<
 		return param;
 	}
 
+	@Override
+	public ArrayList<T> getList(){
+		return this;
+	}
+
 }

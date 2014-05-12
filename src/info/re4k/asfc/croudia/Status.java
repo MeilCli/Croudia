@@ -70,5 +70,7 @@ public interface Status{
 	 * @return 引用返信時に引用された元のstatus
 	 */
 	public Status getReplyStatus();
+	
+	public MediaEntity getMediaEntity();
 
 }

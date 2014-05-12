@@ -1,10 +1,11 @@
 package info.re4k.asfc.croudia.impl;
 
-import java.util.Date;
+import info.re4k.asfc.croudia.MediaEntity;
 import info.re4k.asfc.croudia.Source;
 import info.re4k.asfc.croudia.Status;
 import info.re4k.asfc.croudia.User;
 import info.re4k.asfc.croudia.json.JSONObject;
+import static info.re4k.asfc.croudia.util.JSONUtil.*;
 
 public class StatusImpl implements Status{
 	private long created_at,id,in_reply_to_status_id,in_reply_to_user_id;
@@ -14,19 +15,20 @@ public class StatusImpl implements Status{
 	private Source source;
 	private User user;
 	private Status spread_status,reply_status;
+	private MediaEntity media;
 
 	public StatusImpl(String res){
 		this(new JSONObject(res));
 	}
 
 	public StatusImpl(JSONObject obj){
-		created_at = obj.isNull("created_at")?System.currentTimeMillis():new Date(obj.getString("created_at")).getTime();
-		favorited = obj.isNull("favorited")?false:obj.getBoolean("favorited");
-		spread = obj.isNull("spread")?false:obj.getBoolean("spread");
-		spread_count = obj.isNull("spread_count")?0:obj.getInt("spread_count");
-		favorited_count = obj.isNull("favorited_count")?0:obj.getInt("favorited_count");
-		id = obj.isNull("id")?0:obj.getLong("id");
-		text = obj.isNull("text")?"":obj.getString("text");
+		created_at = getDate(obj,"created_at");
+		favorited = getBoolean(obj,"favorited");
+		spread = getBoolean(obj,"spread");
+		spread_count = getInt(obj,"spread_count");
+		favorited_count = getInt(obj,"favorited_count");
+		id = getLong(obj,"id");
+		text = getString(obj,"text");
 		if(obj.isNull("source")==false){
 			source = new SourceImpl(obj.getJSONObject("source"));
 		}
@@ -34,13 +36,18 @@ public class StatusImpl implements Status{
 			user = new UserImpl(obj.getJSONObject("user"));
 		}
 		in_reply_to_screen_name = obj.isNull("in_reply_to_screen_name")?null:obj.getString("in_reply_to_screen_name");
-		in_reply_to_status_id = obj.isNull("in_reply_to_status_id")?0:obj.getLong("in_reply_to_status_id");
-		in_reply_to_user_id = obj.isNull("in_reply_to_user_id")?0:obj.getLong("in_reply_to_user_id");
+		in_reply_to_status_id = getLong(obj,"in_reply_to_status_id");
+		in_reply_to_user_id = getLong(obj,"in_reply_to_user_id");
 		if(obj.isNull("spread_status")==false){
 			spread_status = new StatusImpl(obj.getJSONObject("spread_status"));
 		}
 		if(obj.isNull("reply_status")==false){
 			reply_status = new StatusImpl(obj.getJSONObject("reply_status"));
+		}
+		if(obj.isNull("entities")==false){
+			if(obj.isNull("media")==false){
+				media = new MediaEntityImpl(obj.getJSONObject("media"));
+			}
 		}
 	}
 
@@ -112,6 +119,11 @@ public class StatusImpl implements Status{
 	@Override
 	public Status getReplyStatus(){
 		return reply_status;
+	}
+
+	@Override
+	public MediaEntity getMediaEntity(){
+		return media;
 	}
 
 }

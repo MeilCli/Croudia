@@ -4,6 +4,7 @@ import info.re4k.asfc.croudia.SearchResult;
 import info.re4k.asfc.croudia.Status;
 import info.re4k.asfc.croudia.json.JSONArray;
 import info.re4k.asfc.croudia.json.JSONObject;
+import static info.re4k.asfc.croudia.util.JSONUtil.*;
 
 public class SearchResultImpl implements SearchResult{
 	private int completed_in,count;
@@ -15,13 +16,13 @@ public class SearchResultImpl implements SearchResult{
 		JSONObject pobj = new JSONObject(res);
 		if(pobj.isNull("search_meta")==false){
 			JSONObject obj = pobj.getJSONObject("search_meta");
-			completed_in = obj.isNull("completed_in")?0:obj.getInt("completed_in");
-			max_id = obj.isNull("max_id")?0:obj.getLong("max_id");
-			since_id = obj.isNull("since_id")?0:obj.getLong("since_id");
-			count = obj.isNull("count")?0:obj.getInt("count");
-			next_results = obj.isNull("next_results")?"":obj.getString("next_results");
-			query = obj.isNull("query")?"":obj.getString("query");
-			refresh_url = obj.isNull("refresh_url")?"":obj.getString("refresh_url");
+			completed_in = getInt(obj,"completed_in");
+			max_id = getLong(obj,"max_id");
+			since_id = getLong(obj,"since_id");
+			count = getInt(obj,"count");
+			next_results = getString(obj,"next_results");
+			query = getString(obj,"query");
+			refresh_url = getString(obj,"refresh_url");
 		}
 		if(pobj.isNull("statuses")==false){
 			JSONArray ar = pobj.getJSONArray("statuses");

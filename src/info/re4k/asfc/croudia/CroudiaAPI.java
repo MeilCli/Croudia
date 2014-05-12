@@ -18,6 +18,10 @@ public interface CroudiaAPI{
 	public static final String secretmail_new = base+"/secret_mails/new.json";
 	public static final String secretmail_destroy = base+"/secret_mails/destroy/";
 	public static final String secretmail_show = base+"/secret_mails/show/";
+	/**
+	 * API documentと違うような
+	 */
+	public static final String secretmail_get_photo = base+"/secret_mails/get_photo/";
 
 	public static final String user_show = base+"/users/show.json";
 	public static final String user_lookup = base+"/users/lookup.json";

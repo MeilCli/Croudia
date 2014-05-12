@@ -46,4 +46,6 @@ public interface SecretMail{
 	 */
 	public String getSenderScreenName();
 
+	public MediaEntity getMediaEntity();
+
 }

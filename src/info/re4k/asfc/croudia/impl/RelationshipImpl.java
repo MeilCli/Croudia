@@ -2,6 +2,7 @@ package info.re4k.asfc.croudia.impl;
 
 import info.re4k.asfc.croudia.Relationship;
 import info.re4k.asfc.croudia.json.JSONObject;
+import static info.re4k.asfc.croudia.util.JSONUtil.*;
 
 public class RelationshipImpl implements Relationship{
 
@@ -15,18 +16,18 @@ public class RelationshipImpl implements Relationship{
 			JSONObject obj = pobj.getJSONObject("relationship");
 			if(obj.isNull("source")==false){
 				JSONObject sobj = obj.getJSONObject("source");
-				source_blocking = sobj.isNull("blocking")?false:sobj.getBoolean("blocking");
-				source_followed_by = sobj.isNull("followed_by")?false:sobj.getBoolean("followed_by");
-				source_following = sobj.isNull("following")?false:sobj.getBoolean("following");
-				source_id = sobj.isNull("id")?0:sobj.getLong("id");
-				source_screen_name = sobj.isNull("screen_name")?"":sobj.getString("screen_name");
+				source_blocking = getBoolean(sobj,"blocking");
+				source_followed_by = getBoolean(sobj,"followed_by");
+				source_following = getBoolean(sobj,"following");
+				source_id = getLong(sobj,"id");
+				source_screen_name = getString(sobj,"screen_name");
 			}
 			if(obj.isNull("target")==false){
 				JSONObject tobj = obj.getJSONObject("target");
-				target_followed_by = tobj.isNull("followed_by")?false:tobj.getBoolean("followed_by");
-				target_following = tobj.isNull("following")?false:tobj.getBoolean("following");
-				target_id = tobj.isNull("id")?0:tobj.getLong("id");
-				target_screen_name = tobj.isNull("screen_name")?"":tobj.getString("screen_name");
+				target_followed_by = getBoolean(tobj,"followed_by");
+				target_following = getBoolean(tobj,"following");
+				target_id = getLong(tobj,"id");
+				target_screen_name = getString(tobj,"screen_name");
 			}
 		}
 	}
